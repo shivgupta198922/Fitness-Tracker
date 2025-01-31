@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://fitnesstrack-vtv1.onrender.com/api/",
+  baseURL: "http://localhost:8080/api/",
 });
 
 export const UserSignUp = async (data) => API.post("/user/signup", data);
@@ -18,6 +18,21 @@ export const getWorkouts = async (token, date) =>
   });
 
 export const addWorkout = async (token, data) =>
-  await API.post(`/user/workout`, data, {
+  await API.post("/user/workout", data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getTutorials = async (token) =>
+  await API.get("/tutorials", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getBlogs = async (token) =>
+  await API.get("/blogs", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getContactInfo = async (token) =>
+  await API.get("/contact", {
     headers: { Authorization: `Bearer ${token}` },
   });
